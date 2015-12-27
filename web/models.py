@@ -3,6 +3,7 @@ Definition of models.
 """
 from django.db import models
 
+
 def generate_foldername(self, filename):
     url = "projects/%s/%s" % (self.slug, filename)
     return url
@@ -17,6 +18,9 @@ class Service(models.Model):
     title = models.CharField(max_length=100, unique=True)
     description = models.TextField()
 
+    def __str__(self):
+        return self.title
+
 
 class Project(models.Model):
     name = models.CharField(max_length=30, unique=True)
@@ -27,6 +31,9 @@ class Project(models.Model):
     tag_list = models.CharField(max_length=100, blank=True)
     beauty_shot = models.ImageField(upload_to=generate_foldername)
     active_flag = models.BooleanField(default=True)
+
+    def __str__(self):
+        return self.name
 
 
 class ProjectDescription(models.Model):
