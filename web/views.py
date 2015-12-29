@@ -9,11 +9,13 @@ def index(request):
 
 
 def services(request):
-    return HttpResponse("Services Page")
+    context = { "name": "Services Page" }
+    return render(request, "web/services.html", context)
 
 
 def about(request):
-    return HttpResponse("About Page")
+    context = { "name": "About Us Page" }
+    return render(request, "web/about.html", context)
 
 
 def contact(request):
@@ -26,8 +28,11 @@ def send_message(request):
 
 
 def projects(request):
-    return HttpResponse("Projects Page")
+    context = { "name": "Projects Page" }
+    return render(request, "web/projects.html", context)
 
 
 def project_details(request, project_id):
-    return HttpResponse("Project Page for Project %s" % project_id)
+    context = { "name": "Project Detail Page" }
+    return render(request, "web/project.html", context)
+    # return HttpResponse("Project Page for Project %s" % project_id)

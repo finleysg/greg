@@ -127,7 +127,7 @@ PIPELINE = {
                 'web/css/font-awesome.css',
                 'web/css/site.css',
             ),
-            'output_filename': 'css/styles.css'
+            'output_filename': 'styles.css'
         }
     },
     'JAVASCRIPT': {
@@ -136,7 +136,7 @@ PIPELINE = {
                 'web/js/jquery.js',
                 'web/js/bootstrap.js'
             ),
-            'output_filename': 'js/scripts.js'
+            'output_filename': 'scripts.js'
         }
     }
 }
