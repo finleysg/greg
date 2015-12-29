@@ -1,10 +1,11 @@
-# from django.shortcuts import render
+from django.shortcuts import render
 from django.http import HttpResponse
 
 
 # Create your views here.
 def index(request):
-    return HttpResponse("Home Page")
+    context = { "name": "Home Page" }
+    return render(request, "web/index.html", context)
 
 
 def services(request):
@@ -16,7 +17,12 @@ def about(request):
 
 
 def contact(request):
-    return HttpResponse("Contact Page")
+    context = { "name": "Contact Page" }
+    return render(request, "web/contact.html", context)
+
+
+def send_message(request):
+    return HttpResponse("We heard you say %s" % request.POST["message"])
 
 
 def projects(request):
