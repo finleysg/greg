@@ -16,7 +16,7 @@ coverage.xml
 # Django stuff:
 *.log
 *.pot
-bizsite/settings.py
+bizsite/local_settings.py
 var/
 
 # Bower
