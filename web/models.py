@@ -22,6 +22,16 @@ class HomePageImage(models.Model):
         return self.caption
 
 
+class AboutPage(models.Model):
+    about_image = models.ImageField(verbose_name="About page main image", upload_to="home")
+    paragraph1 = models.TextField()
+    paragraph2 = models.TextField(blank=True)
+    paragraph3 = models.TextField(blank=True)
+
+    class Meta:
+        verbose_name_plural = "About page"
+
+
 class SiteSetting(models.Model):
     home_page_copy = models.TextField(verbose_name="Home page main text")
     address_line1 = models.CharField(verbose_name="Address (first line)", max_length=40)
@@ -29,9 +39,17 @@ class SiteSetting(models.Model):
     contact_email = models.EmailField(verbose_name="Public email address", blank=True)
     contact_phone = models.CharField(verbose_name="Public phone number", blank=True, max_length=15)
     posted_hours = models.CharField(verbose_name="Public posted hours", blank=True, max_length=60)
-    facebook_address = models.CharField(verbose_name="Public Facebook page", blank=True, max_length=40)
-    linkedin_address = models.CharField(verbose_name="Public Linked-In page", blank=True, max_length=40)
-    twitter_address = models.CharField(verbose_name="Public Twitter address", blank=True, max_length=40)
+    facebook_address = models.CharField(verbose_name="Public Facebook page", blank=True, max_length=100)
+    linkedin_address = models.CharField(verbose_name="Public Linked-In page", blank=True, max_length=100)
+    twitter_address = models.CharField(verbose_name="Public Twitter address", blank=True, max_length=100)
+
+
+class Message(models.Model):
+    from_name = models.CharField(verbose_name="Full Name", max_length=100)
+    from_phone = models.CharField(verbose_name="Phone Number", max_length=20)
+    from_email = models.EmailField(verbose_name="Email Address")
+    message_text = models.TextField(verbose_name="Message")
+    message_date = models.DateTimeField(verbose_name="Message date", auto_now=True)
 
 
 class Service(models.Model):

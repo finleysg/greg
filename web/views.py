@@ -1,6 +1,8 @@
+from django.http import HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
-from django.http import HttpResponse
-from .models import HomePageImage, SiteSetting, Project, ProjectDescription
+# from django.core.mail import send_mail
+from .forms import ContactForm
+from .models import HomePageImage, SiteSetting, Project, AboutPage, Service, Message
 
 
 # Create your views here.
@@ -16,26 +18,44 @@ def index(request):
 
 
 def services(request):
-    context = { "name": "Services Page" }
+    content = Service.objects.all()
+    context = {
+        "name": "Services Page",
+        "services": content
+    }
     return render(request, "web/services.html", context)
 
 
 def about(request):
-    context = { "name": "About Us Page" }
+    content = AboutPage.objects.first()
+    context = {
+        "name": "About Us Page",
+        "about": content
+    }
     return render(request, "web/about.html", context)
 
 
 def contact(request):
     settings = SiteSetting.objects.first()
-    context = {
-        "name": "Contact Page",
-        "settings": settings
-    }
-    return render(request, "web/contact.html", context)
+    # if this is a POST request we need to process the form data
+    if request.method == 'POST':
+        # create a form instance and populate it with data from the request:
+        form = ContactForm(request.POST)
+        # check whether it's valid:
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect('/contact/thank-you')
+
+    # if a GET (or any other method) we'll create a blank form
+    else:
+        form = ContactForm()
+
+    return render(request, 'web/contact.html', {'form': form, 'settings': settings})
 
 
-def send_message(request):
-    return HttpResponse("We heard you say %s" % request.POST["message"])
+def thanks(request):
+    settings = SiteSetting.objects.first()
+    return render(request, 'web/thanks.html', {'settings': settings})
 
 
 def projects(request):
