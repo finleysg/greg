@@ -32,11 +32,11 @@
                 <!-- Wrapper for slides -->
                 <div class="carousel-inner">
                     <div class="item active">
-                        <img class="img-responsive" src="{{ MEDIA_URL }}/{{ project.beauty_shot }}" alt="">
+                        <img class="img-responsive" src="{{ project.optimized_image.url }}" alt="">
                     </div>
                     {% for img in images %}
                         <div class="item">
-                            <img class="img-responsive" src="{{ MEDIA_URL }}/{{ img.image }}" alt="">
+                            <img class="img-responsive" src="{{ img.optimized_image.url }}" alt="">
                         </div>
                     {% endfor %}
                 </div>

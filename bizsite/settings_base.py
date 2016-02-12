@@ -24,7 +24,6 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'pipeline',
     'crispy_forms',
 ]
 
@@ -105,51 +104,3 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
-
-
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/1.9/howto/static-files/
-PIPELINE = {
-    'PIPELINE_ENABLED': True,
-    'CSS_COMPRESSOR': 'pipeline.compressors.NoopCompressor',
-    'JS_COMPRESSOR': 'pipeline.compressors.NoopCompressor',
-    'STYLESHEETS': {
-        'styles': {
-            'source_filenames': (
-                'web/css/bootstrap.css',
-                'web/css/font-awesome.css',
-                'web/css/site.css',
-            ),
-            'output_filename': 'styles.css'
-        }
-    },
-    'JAVASCRIPT': {
-        'scripts': {
-            'source_filenames': (
-                'web/js/jquery.js',
-                'web/js/bootstrap.js'
-            ),
-            'output_filename': 'scripts.js'
-        }
-    }
-}
-
-# STATICFILES_DIRS = (
-#     os.path.join(os.path.dirname(__file__), '..', 'bower_components'),
-# )
-
-STATICFILES_STORAGE = 'pipeline.storage.PipelineCachedStorage'
-
-STATICFILES_FINDERS = (
-    'django.contrib.staticfiles.finders.FileSystemFinder',
-    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
-    'pipeline.finders.PipelineFinder',
-)
-
-STATIC_ROOT = os.path.join(BASE_DIR, 'var/www/static')
-
-STATIC_URL = '/static/'
-
-MEDIA_ROOT = os.path.join(BASE_DIR, 'var/www/media')
-
-MEDIA_URL = '/media/'

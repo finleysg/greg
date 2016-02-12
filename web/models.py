@@ -2,6 +2,8 @@
 Definition of models.
 """
 from django.db import models
+from imagekit.models import ImageSpecField
+from pilkit.processors import ResizeToFit
 
 
 def generate_foldername(self, filename):
@@ -17,6 +19,10 @@ def generate_detail_foldername(self, filename):
 class HomePageImage(models.Model):
     carousel_image = models.ImageField(verbose_name="Carousel Image", upload_to="home")
     caption = models.CharField(verbose_name="Image Caption", max_length=100)
+    optimized_image = ImageSpecField(source='carousel_image',
+                                     processors=[ResizeToFit(800, 600)],
+                                     format='JPEG',
+                                     options={'quality': 82})
 
     def __str__(self):
         return self.caption
@@ -27,6 +33,10 @@ class AboutPage(models.Model):
     paragraph1 = models.TextField()
     paragraph2 = models.TextField(blank=True)
     paragraph3 = models.TextField(blank=True)
+    optimized_image = ImageSpecField(source='about_image',
+                                     processors=[ResizeToFit(600, 600)],
+                                     format='JPEG',
+                                     options={'quality': 82})
 
     class Meta:
         verbose_name_plural = "About page"
@@ -67,6 +77,10 @@ class Project(models.Model):
     # service = models.ForeignKey(Service)
     beauty_shot = models.ImageField(verbose_name="Main project picture", upload_to=generate_foldername)
     active_flag = models.BooleanField(verbose_name="Show project on the web", default=True)
+    optimized_image = ImageSpecField(source='beauty_shot',
+                                     processors=[ResizeToFit(600, 600)],
+                                     format='JPEG',
+                                     options={'quality': 82})
 
     def save(self, *args, **kwargs):
         self.slug = self.name.lower().replace(" ", "-")
@@ -91,4 +105,7 @@ class ProjectDescription(models.Model):
 class ProjectImage(models.Model):
     project = models.ForeignKey(Project)
     image = models.ImageField(verbose_name="Project detail picture", upload_to=generate_detail_foldername)
-
+    optimized_image = ImageSpecField(source='image',
+                                     processors=[ResizeToFit(750, 600)],
+                                     format='JPEG',
+                                     options={'quality': 82})

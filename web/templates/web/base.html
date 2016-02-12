@@ -11,8 +11,10 @@
 
     <title>{% block title %}{% endblock %}</title>
 
-    {% load pipeline %}
-    {% stylesheet 'styles' %}
+	{% load static from staticfiles %}
+	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" type="text/css" rel="stylesheet" />
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" type="text/css" rel="stylesheet" />
+	<link rel="stylesheet" type="text/css" href="{% static 'web/css/site.css' %}" />
 
     <!-- HTML5 Shim and Respond.bower_components IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.bower_components doesn't work if you view the page via file:// -->
@@ -90,8 +92,8 @@
     </div>
     <!-- /.container -->
 
-    {% javascript 'scripts' %}
-    {% block script_block %}{% endblock %}
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 
 </body>
 

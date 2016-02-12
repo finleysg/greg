@@ -24,7 +24,7 @@
                 {% else %}
                 <div class="item">
                 {% endif %}
-                    <div class="fill" style="background-image:url({{ MEDIA_URL }}/{{ img.carousel_image }});"></div>
+                    <div class="fill" style="background-image:url({{ img.optimized_image.url }});"></div>
                     <div class="carousel-caption">
                         <h2>{{ img.caption }}</h2>
                     </div>
