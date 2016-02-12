@@ -18,6 +18,7 @@ coverage.xml
 *.pot
 var/
 bizsite/settings.py
+db.greg
 
 # Bower
 bower_components/
