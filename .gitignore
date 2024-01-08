@@ -14,17 +14,19 @@ nosetests.xml
 coverage.xml
 
 # Django stuff:
+logs/
 *.log
 *.pot
 var/
-bizsite/settings.py
-db.greg
+bizsite/settings_production.py
+bizsite/settings_development.py
+bizsite/wsgi.py
 
-# Bower
-bower_components/
-
-# Node
-node_modules/
-
-# Pycharm
+# Intellij
 .idea/
+greg.iml
+
+venv/
+
+*.zip
+pics/
