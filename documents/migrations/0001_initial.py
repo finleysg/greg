@@ -15,17 +15,6 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
-            name='Document',
-            fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('document_type', models.CharField(choices=[('TODO', 'TODO')], max_length=16, verbose_name='Type')),
-                ('title', models.CharField(max_length=120, verbose_name='Title')),
-                ('file', models.FileField(null=True, upload_to=documents.models.document_directory_path, verbose_name='File')),
-                ('created_by', models.CharField(max_length=100, verbose_name='Created By')),
-                ('last_update', models.DateTimeField(auto_now=True)),
-            ],
-        ),
-        migrations.CreateModel(
             name='Photo',
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),

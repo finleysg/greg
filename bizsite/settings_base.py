@@ -37,7 +37,6 @@ INSTALLED_APPS = (
     "core",
     "documents",
     "messaging",
-    "projects",
 )
 
 MIDDLEWARE = (
@@ -49,9 +48,8 @@ MIDDLEWARE = (
     "django.contrib.auth.middleware.RemoteUserMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
-    "simple_history.middleware.HistoryRequestMiddleware",
     "django_structlog.middlewares.RequestMiddleware",
-    "api.middleware.auth_token",
+    "core.middleware.auth_token",
 )
 
 AUTHENTICATION_BACKENDS = [
@@ -83,8 +81,11 @@ REST_FRAMEWORK = {
 }
 
 DJOSER = {
-    "LOGIN_FIELD": "username",
-    "DEFAULT_FROM_EMAIL": "postmaster@northernsummitconstruction.com"
+    "LOGIN_FIELD": "email",
+    "DEFAULT_FROM_EMAIL": "postmaster@northernsummitconstruction.com",
+    "SERIALIZERS": {
+        "current_user": "core.serializers.UserDetailSerializer",
+    },
 }
 
 LOGGING = {
@@ -156,12 +157,15 @@ structlog.configure(
     cache_logger_on_first_use=True,
 )
 
+# IMAGEKIT_DEFAULT_CACHEFILE_STRATEGY = "imagekit.cachefiles.strategies.Optimistic"
+
 DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
 
-# Internationalization
-# https://docs.djangoproject.com/en/1.9/topics/i18n/
+ROOT_URLCONF = "bizsite.urls"
 
-LANGUAGE_CODE = 'en-us'
+WSGI_APPLICATION = "bizsite.wsgi.application"
+
+LANGUAGE_CODE = "en-us"
 
 TIME_ZONE = 'America/Chicago'
 

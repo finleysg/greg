@@ -12,5 +12,5 @@ djoser==2.2.2
 Pillow==10.1.0
 requests==2.31.0
 pytz==2023.3
-pilkit~=2.0
+pilkit~=3.0
 structlog~=23.1.0

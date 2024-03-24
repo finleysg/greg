@@ -19,7 +19,7 @@ def contact_message(request):
         "Contact Message from " + sender,
         message_text,
         sender_email,
-        ["TODO: retrieve list from site settings", ]
+        ["northernsummitconstruction@gmail.com", "finleysg@gmail.com", ]
     )
 
     return Response(data="message sent", status=201)

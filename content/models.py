@@ -3,7 +3,7 @@ from django.db import models
 
 class PageContent(models.Model):
     key = models.CharField(verbose_name="Key", max_length=20)
-    title = models.CharField(verbose_name="Title", max_length=120, blank=True, null=True)
+    title = models.CharField(verbose_name="Title", max_length=120)
     content = models.TextField(verbose_name="Content")
 
     def __str__(self):

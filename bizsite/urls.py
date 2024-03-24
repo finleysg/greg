@@ -1,25 +1,27 @@
-"""bizsite URL Configuration
-
-The `urlpatterns` list routes URLs to views. For more information please see:
-    https://docs.djangoproject.com/en/1.9/topics/http/urls/
-Examples:
-Function views
-    1. Add an import:  from my_app import views
-    2. Add a URL to urlpatterns:  url(r'^$', views.home, name='home')
-Class-based views
-    1. Add an import:  from other_app.views import Home
-    2. Add a URL to urlpatterns:  url(r'^$', Home.as_view(), name='home')
-Including another URLconf
-    1. Add an import:  from blog import urls as blog_urls
-    2. Import the include() function: from django.conf.urls import url, include
-    3. Add a URL to urlpatterns:  url(r'^blog/', include(blog_urls))
-"""
-from django.conf.urls import include, url
-from django.contrib import admin
 from django.conf import settings
 from django.conf.urls.static import static
+from django.contrib import admin
+from django.urls import path, include
+from rest_framework.routers import DefaultRouter
+
+from core import views as core_views
+from documents import views as document_views
+from messaging import views as messaging_views
+from content import views as content_views
+
+admin.site.site_header = "Northern Summit Construction Administration"
+
+# Create a router and register our viewsets with it.
+router = DefaultRouter()
+router.register(r"photos", document_views.PhotoViewSet, "photos")
+router.register(r"page-content", content_views.PageContentViewSet, "page-content")
+router.register(r"settings", core_views.SiteSettingsViewSet, "settings")
 
 urlpatterns = [
-    url(r'^', include('web.urls')),
-    url(r'^admin/', admin.site.urls),
+    path("admin/", admin.site.urls),
+    path("api/", include(router.urls)),
+    path("api/contact/", messaging_views.contact_message),
+    path("auth/", include("djoser.urls")),
+    path("auth/token/login/", core_views.TokenCreateView.as_view(), name="login"),
+    path("auth/token/logout/", core_views.TokenDestroyView.as_view(), name="logout"),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
