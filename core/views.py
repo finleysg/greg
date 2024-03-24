@@ -34,7 +34,7 @@ class TokenCreateView(djoser.views.TokenCreateView):
             secure = not is_localhost,
             httponly = True,
             samesite = "Lax",
-            domain = "api.bhmc.org" if not is_localhost else None,
+            domain = "finleysg.pythonanywhere.com" if not is_localhost else None,
         )
 
         response.data = "Welcome!"
