@@ -10,7 +10,6 @@ from bizsite.settings import is_development, to_bool
 from .models import SiteSettings
 from .serializers import SiteSettingsSerializer
 
-
 is_localhost = to_bool(is_development)
 
 
@@ -28,13 +27,14 @@ class TokenCreateView(djoser.views.TokenCreateView):
         data = token_serializer_class(token).data
 
         response.set_cookie(
-            key = "access_token",
-            value = data["auth_token"],
-            max_age = timedelta(days=30),
-            secure = not is_localhost,
-            httponly = True,
-            samesite = "Lax",
-            domain = "finleysg.pythonanywhere.com" if not is_localhost else None,
+            key="access_token",
+            path="/",
+            value=data["auth_token"],
+            max_age=timedelta(days=180),
+            secure=not is_localhost,
+            httponly=True,
+            samesite="Lax",
+            domain="api.northernsummitconstruction.com" if not is_localhost else None,
         )
 
         response.data = "Welcome!"
@@ -49,7 +49,12 @@ class TokenDestroyView(djoser.views.TokenDestroyView):
 
     def post(self, request):
         response = Response()
-        response.delete_cookie("access_token")
+        response.delete_cookie(
+            key="access_token",
+            path="/",
+            samesite="Lax",
+            domain="api.northernsummitconstruction.com" if not is_localhost else None,
+        )
         response.status_code = status.HTTP_204_NO_CONTENT
         utils.logout_user(request)
         return response
